@@ -93,7 +93,7 @@ Leader có thể:
 Để đẩy nhanh quá trình phát triển *hệ thống*, sàn chính nên có trách nhiệm cung cấp:
 
 1. **API kiểm tra thông tin *người dùng*** để phục vụ cho chức năng đăng nhập tại **mục I.1**.
-2. **API lấy thông tin tài khoản MT5** để phục vụ cho chức năng theo dõi tài khoản MT5 tại **mục II.4** và chức năng thống kê lợi nhuận tại **mục **.
+2. **API lấy thông tin tài khoản MT5** để phục vụ cho chức năng theo dõi tài khoản MT5 tại **mục II.4** và chức năng thống kê lợi nhuận tại **mục II.5**.
      >Thông tin về giải pháp API sẽ được đề cập đầy đủ tại *tài liệu chi tiết*.
 
 
