@@ -1,75 +1,111 @@
+*Tài liệu này chỉ là tài liệu tóm tắt dùng để thể hiện nội dung sơ bộ của hệ thống, không phải là nội dung cuối cùng, có thể thêm, sửa hay xoá các yêu cầu vào thời gian sau này. Phương thức làm việc, cách triển khai hệ thống, cách thiết kế, cũng như các yêu cầu chi tiết đối với từng vấn đề giữa nhà phát triển và sàn sẽ được thoả thuận kỹ và có tài liệu chi tiết cung cấp cho sàn sau khi hệ thống được chấp thuận.*
+
+---
 Phụ lục: Từ ngữ thường dùng trong tài liệu này:
 ---
-- Sàn chính: sàn giao dịch gốc, nơi người dùng có thể giao dịch, đăng ký, nạp tiền, v/v.
-- Hệ thống: trang web dành cho copy trading, là trang web mục tiêu của dự án.
-- Người dùng: khách hàng của *sàn chính*, là người sử dụng *hệ thống* với mục đích trở thành follower hoặc leader.
-- Nhà phát triển: người phát triển hệ thống.
-
+- *Quản trị viên*: là người có toàn quyền quản lý trang web quản lý copy-trading.
+- *Hệ thống*: trang web quản lý copy trading, là trang web mục tiêu của dự án do *nhà phát triển* xây dựng.
+- *Người dùng*: khách hàng của *sàn*, là người sử dụng *hệ thống* với mục đích quản lý tài khoản copy-trading của mình.
+- *Nhà phát triển*: người viết tài liệu này và cũng là người phát triển *hệ thống*, chịu trách nhiệm với mọi vấn đề của *hệ thống*.
+- API: Application Programming Interface, là phương thức kết nối, giao tiếp giữa trang web quản lý copy-trading và hệ thống có sẵn của sàn.
+- *Tài liệu chi tiết*: là tài liệu được *nhà phát triển* cung cấp sau khi dự án được chấp thuận, có đầy đủ các phương thức làm việc, cách triển khai dự án, cách thiết kế, cũng như các yêu cầu chi tiết đối với từng vấn đề giữa hai bên sau khi thoả thuận với *sàn*.
 ---
 
 **I. Chức năng đảm bảo**
 ===
-Người dùng:
+Người dùng có thể:
 ---
-1. Đăng nhập
-<!---
-Một trong số các giải pháp sau:
-     1. Sử dụng **API OAuth 2.0** do **sàn chính cung cấp** (khuyến khích nếu sàn **đã tích hợp sẵn OAuth**; nếu sàn **chưa tích hợp sẵn OAuth** thì không khuyến khích vì sẽ mất thời gian để phát triển và thử nghiệm).
-     2. Sử dụng **email//số điện thoại** của người dùng trên *sàn chính* và **mã bí mật** *(secret code)* do *sàn chính* tạo ra, gửi cho *người dùng* và *hệ thống*.)
--->
-     *Người dùng* có thể đăng nhập vào *hệ thống* thông qua thông tin của *sàn chính* mà **không cần sử dụng mật khẩu của người dùng tại *sàn chính***. 
-     > Hiện *hệ thống* đang có 3 giải pháp có thể thực hiện chức năng này, thông tin về giải pháp sẽ được cung cấp với *sàn chính* sau khi *hệ thống* được chấp thuận.
-2. Trở thành leader
-<!---
-     - *Người dùng* **cần** chọn tài khoản MT5 sẵn có.
---->
-    *Người dùng* có thể chọn trở thành leader trong hệ thống. *Người dùng* **cần** cung cấp các thông tin cần thiết, các thông tin này được đề cập tại **mục II.2.ii**
-3. Trở thành follower
-<!---
-     - *Người dùng* **phải** chọn tài khoản MT5 sẵn có.
---->
-    *Người dùng* có thể chọn trở thành follower trong hệ thống. *Người dùng* **cần** cung cấp các thông tin cần thiết. Thông tin này được đề cập tại **mục II.2.i**.
-4. Theo dõi tài khoản MT5.
-     - *Người dùng* có thể theo dõi thông tin của (các) tài khoản MT5 của mình. Các thông tin này được đề cập tại **mục II.2.iiI**.
-5. Thống kê lợi nhuận
-     - *
+1. Đăng nhập\
+*Người dùng* có thể đăng nhập vào *hệ thống* thông qua thông tin của *người dùng* mà **không cần sử dụng mật khẩu của người dùng tại *sàn***.
+     > Hiện *hệ thống* đang có 3 giải pháp có thể thực hiện chức năng này, thông tin về giải pháp sẽ được *nhà phát triển* thảo luận với *quản trị viên* và sẽ được trình bày đầy đủ trong *tài liệu chi tiết*.
 
-Bảo mật:
----
-- 
+2. Xem danh sách leader\
+*Người dùng* có thể xem danh sách các leader đã được hệ thống xác thực, thể hiện các thông số của các leader đó (thông tin, lịch sử giao dịch, tổng lợi nhuận, v/v). Từ danh sách các leader, *người dùng* có thể chọn follow một (vài) leader trong danh sách đó.
+3. Trở thành leader\
+*Người dùng* có thể chọn trở thành leader trong hệ thống và vẫn giữ được các quyền của *người dùng*. *Người dùng* **cần** cung cấp các thông tin mà *quản trị viên* yêu cầu trước khi trở thành leader.
+4. Trở thành follower\
+    *Người dùng* sau khi follow một (vài) leader trong hệ thống sẽ trở thành follower và vẫn giữ nguyên các quyền của *người dùng*. *Người dùng* **cần** cung cấp các thông tin mà *quản trị viên* yêu cầu trước khi trở thành follower.
+5. Theo dõi (các) tài khoản MT5 của mình.\
+      *Người dùng*  có thể theo dõi thông tin (các) tài khoản MT5 của mình.
+6. Thống kê lợi nhuận\
+      *Người dùng* có thể xem thống kê lợi nhuận của mình theo nhiều phương thức như lợi nhuận ngày hay lợi nhuận ròng, v/v dưới dạng thống kê hay biểu đồ.
+7. Nhận thông báo\
+      *Người dùng* có thể xem thông báo do *quản trị viên* hoặc *hệ thống* gửi tới.
+8. Liên hệ hỗ trợ\
+      Nếu có vấn đề xảy ra trong quá trình sử dụng *hệ thống*, người dùng có thể liên hệ với *nhà phát triển* hoặc *quản trị viên*, tuỳ theo từng trường hợp vấn đề cụ thể.
 
 ---
-
-Dashboard
+Follower có thể:
 ---
+1. Xem danh sách leader đã follow\
+      *Người dùng* có thể xem danh sách các leader đã follow, từ đó có thể thực hiện các tác vụ khác.
+
+2. Ngừng follow leader\
+      *Người dùng* có quyền huỷ follow (một hay nhiều) các leader trong danh sách leader đã follow.
+3. Chỉnh sửa thông tin copy-trading\
+      *Người dùng* có thể chỉnh sửa thông tin (tỷ lệ chia lợi nhuận, tỷ lệ lot, v/v) của gói copy-trading của (một hay nhiều) leader.
 
 ---
+Leader có thể:
+---
+1. Xem danh sách các follower\
+      Leader có thể xem danh sách các *người dùng* follow mình.
+2. Xem thống kê \
+      Leader có thể xem thống kê (tổng lợi nhuận, tỷ lệ lợi nhuận đã được chia, v/v) theo dạng thông số hoặc biểu đồ.
+3. Chỉnh sửa thông tin\
+      Leader có thể chỉnh sửa các thông gói copy-trading của mình như tỷ lệ chia lợi nhuận, tài khoản tối thiểu, v/v.
 
-**II. Yêu cầu sàn chính cung cấp:**
+---
+*Quản trị viên* có thể:
+---
+1. Xem thông tin *người dùng*\
+      *Quản trị viên* có thể xem thông tin (một hay nhiều) *người dùng* bất kỳ trong *hệ thống*.
+
+2. Duyệt leader\
+      *Người dùng* sau khi đăng ký làm leader sẽ được đưa vào hàng chờ, *hệ thống* có thể xem thông tin *người dùng*, sau đó có thể phê duyệt để (một hay nhiều) *người dùng* đó trở thành leader hoặc từ chối.
+      > Hoặc *hệ thống* có thể tự động hoá quá trình này.
+3. Thêm leader\
+      *Quản trị viên* có thể thêm (một hay nhiều) leader trực tiếp vào *hệ thống* mà không cần phải chờ leader đăng ký.
+4. Huỷ tư cách leader\
+      *Quản trị viên* có thể huỷ tư cách (một hay nhiều) leader của bất kỳ leader nào. Có thể thông báo hoặc không thông báo cho leader đó.
+5. Gửi thông báo\
+      *Hệ thống* cho phép *quản trị viên* gửi (một hay nhiều) thông báo cho tất cả *người dùng* copy-trading hoặc một *người dùng* cụ thể. Có thể cài đặt trước thông báo và gửi thông báo lặp lại (sau một khoảng thời gian).
+6. Xem thống kê *hệ thống*\
+      *Quản trị viên* có thể xem thống kê về mọi thông số (số người dùng, tổng thu, lợi nhuận, v/v) của *hệ thống*.
+      > Thông tin của các thông số mà *quản trị viên* muốn theo dõi sẽ được thoả thuận đầy đủ tại *tài liệu chi tiết*.
+7. Xuất thông tin\
+      *Quản trị viên* có thể xuất các thông tin khác nhau (doanh số, người dùng, lợi nhuận, v/v).
+
+---
+**II. Trách nhiệm của *nhà phát triển***
 ===
-1. Chức năng
-     1. **API kiểm tra thông tin *người dùng*** để phục vụ cho chức năng đăng nhập tại **mục I.1**.
-     > Thông tin của API sẽ được thống nhất với *sàn chính* sau khi *hệ thống* được chấp thuận.
-     3. **API lấy thông tin tài khoản MT5** theo **mục II.4**.
-2. Thông tin
-     1. Những thông tin *người dùng* **cần** cung cấp khi chọn trở thành follower.
-     2. Những thông tin *người dùng* **cần** cung cấp khi chọn trở thành leader.
-     2. Những thông tin về tài khoản MT5 mà *người dùng* **được phép** theo dõi.
-     3. Môi trường hoạt động *hệ thống*.
-     > *Nhà phát triển* muốn phát triển *hệ thống* bằng ngôn ngữ **Python** *hoặc* **JavaScript**, hosting có sẵn của *sàn chính* **có thể** sẽ không thích hợp với các môi trường này.
-     > *Sàn chính* có thể yêu cầu *nhà phát triển* sử dụng môi trường thuận tiện hơn cho *sàn chính* nhưng sẽ **tăng thời gian phát triển** của *hệ thống*
-     <!--- Người dùng có thể vừa là leader vừa là follower trên cùng 1 tài khoản MT5? Trên nhiều tài khoản MT5?>
-3. Tài nguyên
-     1. **Tên miền** và **hosting** cho *hệ thống*. 
+*Nhà phát triển* đảm bảo:
+
+- người dùng có thể truy cập được trên máy tính, điện thoại.
+- bảo mật thông tin của *người dùng* và *quản trị viên*.
+- *hệ thống* hoạt động thông suốt, nhanh chóng với thời gian chết ngắn hoặc không có.
+- *hệ thống* ổn định, có thể phục hồi nhanh nếu xảy ra sự cố.
+- mọi thao tác của *người dùng* và *hệ thống* đều dễ dàng sử dụng.
+- mọi hoạt động được tạo ra bởi *người dùng* hoặc *quản trị viên* đều được thực hiện chính xác với thời gian chờ thấp.
+
+**II. Trách nhiệm của *quản trị viên***
+===
+Để đẩy nhanh quá trình phát triển *hệ thống*, sàn chính nên có trách nhiệm cung cấp:
+
+1. **API kiểm tra thông tin *người dùng*** để phục vụ cho chức năng đăng nhập tại **mục I.1**.
+2. **API lấy thông tin tài khoản MT5** để phục vụ cho chức năng theo dõi tài khoản MT5 tại **mục II.4** và chức năng thống kê lợi nhuận tại **mục **.
+     >Thông tin về giải pháp API sẽ được đề cập đầy đủ tại *tài liệu chi tiết*.
+
+
+3. **Tên miền** cho *hệ thống*.
+4. **Hosting** cho *hệ thống*.
+     > *Nhà phát triển* đã có giải pháp giành cho tên miền và hosting của *hệ thống*, sẽ được đề cập đầy đủ tại *tài liệu chi tiết*.
+5. (tuỳ ý) **Hệ thống lưu trữ** sử dụng cho việc back-up *hệ thống*.
 
 ---
-
-**III. Chức năng hệ thống không chịu trách nhiệm**
+**III. Lý do nên chọn *hệ thống* này:**
 ===
-Hệ thống sẽ **không chịu trách nhiệm** hoặc **chưa chịu trách nhiệm** (*có thể hoàn thành vào các giai đoạn khác của dự án*) về những chức năng sau:
-
-1. Chức năng **đăng ký** và **lấy lại** mật khẩu dành cho *người dùng*: *Người dùng* có thể dùng những chức năng này tại *sàn chính*.
-2. Chức năng **tạo tài khoản MT5 mới** dành cho *người dùng*: *Người dùng* có thể dùng chức năng này tại *sàn chính*.
-3. Chức năng **nạp tiền** và **gửi tiền** dưới bất kỳ hình thức nào dành cho *người dùng*: *Người dùng có thể dùng chức năng này tại sàn chính*.
-3. *Nhà phát triển* không chịu trách nhiệm về **tên miền** và **hosting** cho hệ thống. Nếu *sàn chính*
-4. *Hệ thống* không chịu trách nhiệm về *mã bí mật* của *người dùng*. *Sàn chính* và *người dùng* phải chịu trách nhiệm về *mã bí mật* của người dùng vì mọi chức năng của *hệ thống* chỉ có thể sử dụng khi có *mã bí mật* của *người dùng*.
+- *Hệ thống* không cần sử dụng database, từ đó tiết kiệm chi phí cho *Quản trị viên* và tiết kiệm thời gian phát triển *hệ thống*.
+- *Hệ thống* sử dụng thông tin trực tiếp từ hệ thống có sẵn của sàn mà vẫn đảm bảo bảo mật thông tin cho *người dùng*. *Người dùng* có thể dễ dàng sử dụng *hệ thống* và *Quản trị viên* có thể dễ dàng quản lý *người dùng* cũng như *hệ thống*.
+- *Hệ thống* hoạt động trên môi trường web, có thể truy cập, hiển thị và hoạt động được bằng phần lớn các thiết bị có kết nối Internet cơ bản.
+- *Nhà phát triển* sẽ có *tài liệu chi tiết* chứa đầy đủ thông tin của *hệ thống*, thuận lợi cho việc nâng cấp và bảo trì *hệ thống* sau này.
