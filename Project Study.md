@@ -109,3 +109,4 @@ Leader có thể:
 - *Hệ thống* sử dụng thông tin trực tiếp từ hệ thống có sẵn của sàn mà vẫn đảm bảo bảo mật thông tin cho *người dùng*. *Người dùng* có thể dễ dàng sử dụng *hệ thống* và *Quản trị viên* có thể dễ dàng quản lý *người dùng* cũng như *hệ thống*.
 - *Hệ thống* hoạt động trên môi trường web, có thể truy cập, hiển thị và hoạt động được bằng phần lớn các thiết bị có kết nối Internet cơ bản.
 - *Nhà phát triển* sẽ có *tài liệu chi tiết* chứa đầy đủ thông tin của *hệ thống*, thuận lợi cho việc nâng cấp và bảo trì *hệ thống* sau này.
+- *Sàn* sẽ có quyền theo dõi tất cả quá trình phát triển của *hệ thống*.
