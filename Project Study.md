@@ -77,23 +77,75 @@ Leader có thể:
       *Quản trị viên* có thể xuất các thông tin khác nhau (doanh số, người dùng, lợi nhuận, v/v).
 
 ---
+**II. Ước lượng thời gian thực hiện**
+===
+
+
+1. Người dùng:
+
+- Đăng nhập: 6h
+- Xem danh sách leader: 12h
+- Trở thành leader: 2h
+- Trở thành follower: 2h
+- Theo dõi (các) tài khoản MT5: 6h
+- Thống kê lợi nhuận: 12h
+- Nhận thông báo: 2h
+- Liên hệ hỗ trợ: 1h
+Tổng cộng: 43h
+
+
+2. Follower:
+
+- Xem danh sách leader đã follow: 4h
+- Ngừng follow leader: 2h
+- Chỉnh sửa thông tin copy-trading: 2h
+Tổng cộng: 8h
+3. Leader:
+
+- Xem danh sách các follower: 4h
+- Xem thống kê: 16h
+- Chỉnh sửa thông tin: 2h
+Tổng cộng: 22h
+4. Quản trị viên:
+
+- Xem thông tin người dùng: 1h
+- Duyệt leader: 1h
+- Thêm leader: 1h
+- Huỷ tư cách leader: 1h
+- Gửi thông báo: 8h
+- Xem thống kê hệ thống: 16h
+- Xuất thông tin: 6h
+Tổng cộng: 34h
+5. Giao diện:
+
+- Tạo giao diện cho toàn trang web: 36h
+- Đảm bảo trang web hoạt động trên nhiều loại thiết bị: 24h\
+Tổng cộng: 60h
+
+
+Thời gian ước tính cho toàn hệ thống: 167h.
+Mức chi phí cho hệ thống được nhắc tới tại **mục III.6**.
+---
+
+---
 **II. Trách nhiệm của *nhà phát triển***
 ===
 *Nhà phát triển* đảm bảo:
 
-- người dùng có thể truy cập được trên máy tính, điện thoại.
+- theo dõi bảo trì hệ thống liên tục một tháng đầu tiên sau khi hệ thống hoàn thành (*hệ thống* vốn được thiết kế để không cần phải bảo trì thường xuyên).
+- sửa lỗi (nếu có) liên quan đến chức năng mà *nhà hệ thống* chịu trách nhiệm.
+- ưu tiên hợp tác với *sàn* nếu có nhu cầu thêm chức năng hoặc bàn giao *hệ thống* tới nhà phát triển khác của *sàn*.
 - bảo mật thông tin của *người dùng* và *quản trị viên*.
 - *hệ thống* hoạt động thông suốt, nhanh chóng với thời gian chết ngắn hoặc không có.
 - *hệ thống* ổn định, có thể phục hồi nhanh nếu xảy ra sự cố.
-- mọi thao tác của *người dùng* và *hệ thống* đều dễ dàng sử dụng.
 - mọi hoạt động được tạo ra bởi *người dùng* hoặc *quản trị viên* đều được thực hiện chính xác với thời gian chờ thấp.
 
-**II. Trách nhiệm của *quản trị viên***
+**III. Trách nhiệm của *sàn***
 ===
-Để đẩy nhanh quá trình phát triển *hệ thống*, sàn chính nên có trách nhiệm cung cấp:
+Để đẩy nhanh quá trình phát triển *hệ thống*, *sàn* nên có trách nhiệm cung cấp:
 
 1. **API kiểm tra thông tin *người dùng*** để phục vụ cho chức năng đăng nhập tại **mục I.1**.
-2. **API lấy thông tin tài khoản MT5** để phục vụ cho chức năng theo dõi tài khoản MT5 tại **mục II.4** và chức năng thống kê lợi nhuận tại **mục II.5**.
+2. **API lấy thông tin tài khoản MT5** để phục vụ cho chức năng theo dõi tài khoản MT5 tại **mục I.4** và chức năng thống kê lợi nhuận tại **mục I.5**.
      >Thông tin về giải pháp API sẽ được đề cập đầy đủ tại *tài liệu chi tiết*.
 
 
@@ -101,9 +153,10 @@ Leader có thể:
 4. **Hosting** cho *hệ thống*.
      > *Nhà phát triển* đã có giải pháp giành cho tên miền và hosting của *hệ thống*, sẽ được đề cập đầy đủ tại *tài liệu chi tiết*.
 5. (tuỳ ý) **Hệ thống lưu trữ** sử dụng cho việc back-up *hệ thống*.
+6. Mức chi trả 1500$ cho việc hoàn thành *hệ thống*. Sau thời gian 1 tháng như *nhà phát triển* đảm bảo, nếu *sàn* vẫn muốn *nhà phát triển* bảo trì trang web hoặc thêm/ chỉnh sửa chức năng, *sàn* phải chịu trách nhiệm thêm về phần chi phí này với mức 10$/h.
 
 ---
-**III. Lý do nên chọn *hệ thống* này:**
+**IV. Lý do nên chọn *hệ thống* này:**
 ===
 - *Hệ thống* không cần sử dụng database, từ đó tiết kiệm chi phí cho *Quản trị viên* và tiết kiệm thời gian phát triển *hệ thống*.
 - *Hệ thống* sử dụng thông tin trực tiếp từ hệ thống có sẵn của sàn mà vẫn đảm bảo bảo mật thông tin cho *người dùng*. *Người dùng* có thể dễ dàng sử dụng *hệ thống* và *Quản trị viên* có thể dễ dàng quản lý *người dùng* cũng như *hệ thống*.
